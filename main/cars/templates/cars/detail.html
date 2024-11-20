@@ -1,0 +1,25 @@
+{% extends "cars/base.html" %}
+
+{% block title %}Detail Page{% endblock %}
+
+{% block content %}
+<div class="detail_con">
+  <div class="card-container">
+    <div class="wrapper">
+      <div class="banner-image">
+        <img
+          src="{{ car.image }}" alt="{{ car.title }}"
+        />
+      </div>
+      <h1 class="card_title">{{car.title}}</h1>
+      <p class="card_content">
+        {{car.description}}
+      </p>
+    </div>
+    <div class="button-wrapper">
+      <a href="car/{{car.id}}" class="btn outline">DETAILS</a>
+      <button class="btn fill">BUY NOW</button>
+    </div>
+  </div>
+</div>
+{% endblock %}

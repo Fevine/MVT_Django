@@ -1,0 +1,34 @@
+{% extends "cars/base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<h1 class="section_title">Cars</h1>
+
+<div class="card_wrapper">
+  
+{% for car in data %}
+  
+  <div class="card-container">
+      <div class="wrapper">
+        <div class="banner-image">
+          <img
+            src="{{ car.image }}" alt="{{ car.title }}"
+          />
+        </div>
+        <h1 class="card_title">{{car.title}}</h1>
+        <p class="card_content">
+          {{car.description}}
+        </p>
+      </div>
+      <div class="button-wrapper">
+        <a href="car/{{car.id}}" class="btn outline">DETAILS</a>
+        <button class="btn fill">BUY NOW</button>
+      </div>
+  </div>
+
+{% endfor %}
+  
+</div>
+{% endblock %}
