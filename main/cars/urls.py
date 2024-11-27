@@ -5,4 +5,6 @@ urlpatterns = [
     path('', views.index, name="home"),
     re_path(r'^add/', views.add, name="add"),
     path('car/<int:id>/', views.detail),
+    path('teze/', views.tezefunc),
+    path('test/', views.testPage),
 ]

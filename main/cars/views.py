@@ -1,5 +1,6 @@
+from datetime import datetime
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 
 # Create your views here.
 
@@ -69,3 +70,33 @@ def detail(request, id):
     car = data[id-1]
 
     return render(request, 'cars/detail.html', {"car": car})
+
+
+def tezefunc(request):
+
+    arr = ["test1sdgsdgsdgsdgsdgsdg", "test2sdgsdgsdg", "tsdgsdgest3"]
+
+    date = datetime.now()
+
+    title = "Teze Page"
+
+    num = 234.56
+
+    my_data = {
+        "arr": arr,
+        "title": title,
+        "date": date,
+        "num": num,
+    }
+
+    return render(request, "cars/teze.html", my_data)
+
+
+def errorPage(request, exception):
+    return HttpResponseNotFound("Sehife yoxdu")
+
+
+def testPage(request):
+    name = request.GET.get("name")
+    age = request.GET.get("age")
+    return HttpResponse(f"Ad={name}, age={age}")
