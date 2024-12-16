@@ -1,6 +1,7 @@
 from datetime import datetime
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound
+from cars.models import *
 
 # Create your views here.
 
@@ -40,12 +41,14 @@ data = [
 
 def index(request):
 
-    return render(request, 'cars/index.html', {'data': data})
+    cars = Car.objects.all()
+
+    return render(request, 'cars/index.html', {'data': cars})
 
 
 def add(request):
 
-    content = {}
+    # content = {}
 
     if request.method == 'POST':
         # Get form data from POST request
@@ -53,23 +56,33 @@ def add(request):
         description = request.POST.get('description')
         image = request.POST.get('image')
 
-        content = {
-            "id": str(len(data) + 1),
-            "title": title,
-            "description": description,
-            "image": image,
-        }
+        new_car = Car.objects.create(
+            title=title,
+            description=description,
+            image=image,
+        )
 
-        data.append(content)
+        # content = {
+        #     "id": str(len(data) + 1),
+        #     "title": title,
+        #     "description": description,
+        #     "image": image,
+        # }
 
-    return render(request, 'cars/add.html', {"content": content})
+        # data.append(content)
+
+    return render(request, 'cars/add.html', {"content": new_car})
 
 
 def detail(request, id):
 
-    car = data[id-1]
+    car = Car.objects.get(id=id)
 
     return render(request, 'cars/detail.html', {"car": car})
+
+
+def errorPage(request, exception):
+    return HttpResponseNotFound("Sehife yoxdu")
 
 
 def tezefunc(request):
@@ -90,10 +103,6 @@ def tezefunc(request):
     }
 
     return render(request, "cars/teze.html", my_data)
-
-
-def errorPage(request, exception):
-    return HttpResponseNotFound("Sehife yoxdu")
 
 
 def testPage(request):
